@@ -8,9 +8,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - name: install clang-format 18
+        run: sudo apt update -yqq && sudo apt install clang-format-18
       - name: update alternatives
         run: |
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+          sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-18 100
       - name: print details
-        run: g++ --version; clang++ --version
+        run: g++ --version; clang++ --version; clang-format --version

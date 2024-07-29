@@ -1,0 +1,16 @@
+name: linux
+on:
+  push:
+    branches:
+      - '*'
+jobs:
+  build-linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: update alternatives
+        run: |
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+      - name: print details
+        run: g++ --version; clang++ --version
